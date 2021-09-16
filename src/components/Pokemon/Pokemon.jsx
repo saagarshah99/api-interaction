@@ -28,7 +28,7 @@ const Pokemon = ({ heading }) => {
         catch(err) {console.error(err);}
 
     }
-    useEffect(() => {getPokemon()}, []);
+    useEffect(() => {getPokemon()});
 
     const capitaliseFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1);
     
