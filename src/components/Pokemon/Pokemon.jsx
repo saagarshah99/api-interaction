@@ -10,7 +10,7 @@ const Pokemon = ({ heading }) => {
     });
 
     // loading input in search value, randomly generate one by default
-    const [searchQuery, setSearchQuery] = useState(Math.floor(Math.random() * 900) + 1)
+    const [searchQuery, setSearchQuery] = useState(Math.floor(Math.random() * 800) + 1)
     const handleInput = (event) => setSearchQuery(event.target.value.toLowerCase());
 
     // fetching data from pokemon api in json response if found
