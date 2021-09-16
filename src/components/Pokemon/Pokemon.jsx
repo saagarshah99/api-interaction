@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./Pokemon.scss";
 
 const Pokemon = ({ heading }) => {
@@ -9,13 +9,13 @@ const Pokemon = ({ heading }) => {
         sprites: {back_default: ""}
     });
 
-    // loading input in search value
-    const [searchQuery, setSearchQuery] = useState("")
+    // loading input in search value, randomly generate one by default
+    const [searchQuery, setSearchQuery] = useState(Math.floor(Math.random() * 900) + 1)
     const handleInput = (event) => setSearchQuery(event.target.value.toLowerCase());
 
     // fetching data from pokemon api in json response
     const getPokemon = (event) => {
-        event.preventDefault();
+        if(event) event.preventDefault();
 
         if(searchQuery) {
             fetch(`https://pokeapi.co/api/v2/pokemon/${searchQuery}`)
@@ -24,11 +24,13 @@ const Pokemon = ({ heading }) => {
                 .catch(error => console.log(error))
         }
     }
+    useEffect(() => {getPokemon()}, []);
 
-    // return type or image if found from api
-    const getPokemonType = (type) => {
-        return type ? "Type: " + type.charAt(0).toUpperCase() + type.slice(1) : "";
-    }
+    const capitaliseFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+    
+    // return name, type or image if found from api
+    const getPokemonName = (name) => name ? "Name: " + capitaliseFirstLetter(name) : "";
+    const getPokemonType = (type) => type ? "Type: " + capitaliseFirstLetter(type) : "";
     const getPokemonImage = (img) => img ? img : "";
 
     return (
@@ -40,10 +42,17 @@ const Pokemon = ({ heading }) => {
                 <input type="submit" className="pokemon_search-btn" value="Search" />
             </form>
 
-            <p className="pokemon__type-text">{getPokemonType(pokemon.types[0].type.name)}</p>
-            
-            <img className="pokemon__sprite" alt={""} 
-            src={getPokemonImage(pokemon.sprites.back_default)} />
+            <div className="pokemon__output">
+                <section className="pokemon__output-text">
+                    <p>{getPokemonName(pokemon.name)}</p>
+                    <p>{getPokemonType(pokemon.types[0].type.name)}</p>
+                </section>
+
+                <section className="pokemon__output-img">
+                    <img className="pokemon__sprite" alt={""} 
+                    src={getPokemonImage(pokemon.sprites.back_default)} />
+                </section>
+            </div>
         </section>
     )
 }
