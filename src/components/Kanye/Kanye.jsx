@@ -20,7 +20,7 @@ const Kanye = ({ heading }) => {
 
             <button className="kanye___btn" onClick={getYeQuote}>Get Some Ye!</button>
 
-            <p className="kanye__quote">{yeQuote ? yeQuote : ""}</p>
+            <p className="kanye__quote">"{yeQuote ? yeQuote : ""}"</p>
         </section>
     )
 }

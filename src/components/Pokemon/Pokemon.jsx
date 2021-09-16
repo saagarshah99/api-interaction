@@ -49,8 +49,7 @@ const Pokemon = ({ heading }) => {
                 </section>
 
                 <section className="pokemon__output-img">
-                    <img className="pokemon__sprite" alt={""} 
-                    src={getPokemonImage(pokemon.sprites.back_default)} />
+                    <img src={getPokemonImage(pokemon.sprites.back_default)} alt={""} />
                 </section>
             </div>
         </section>
