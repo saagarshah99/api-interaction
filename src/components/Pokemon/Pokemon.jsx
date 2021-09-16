@@ -13,16 +13,20 @@ const Pokemon = ({ heading }) => {
     const [searchQuery, setSearchQuery] = useState(Math.floor(Math.random() * 900) + 1)
     const handleInput = (event) => setSearchQuery(event.target.value.toLowerCase());
 
-    // fetching data from pokemon api in json response
+    // fetching data from pokemon api in json response if found
     const getPokemon = (event) => {
         if(event) event.preventDefault();
 
-        if(searchQuery) {
-            fetch(`https://pokeapi.co/api/v2/pokemon/${searchQuery}`)
-                .then(response => response.json())
-                .then(jsonResponse =>{setPokemon(jsonResponse)})
-                .catch(error => console.log(error))
+        try {
+            if(searchQuery) {
+                fetch(`https://pokeapi.co/api/v2/pokemon/${searchQuery}`)
+                    .then(response => response.json())
+                    .then(jsonResponse =>{setPokemon(jsonResponse)})
+                    .catch(error => console.log(error))
+            }
         }
+        catch(err) {console.error(err);}
+
     }
     useEffect(() => {getPokemon()}, []);
 

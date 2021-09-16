@@ -8,11 +8,11 @@ const App = () => {
       <h1>API Interactions</h1>
 
       <div className="api">
-        <Kanye heading="Kanye West" />
+        <Kanye heading="1) Kanye West" />
 
         {/* <hr /> */}
 
-        <Pokemon heading="Pokemon" />
+        <Pokemon heading="2) Pokemon" />
       </div>
 
     </div>
